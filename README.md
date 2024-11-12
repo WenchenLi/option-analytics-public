@@ -1,19 +1,4 @@
-# 🎈 Blank app template
+#  Simple option return by High/open on weekly expiration 
+updated daily
 
-A simple Streamlit app template for you to modify!
-
-[![Open in Streamlit](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://blank-app-template.streamlit.app/)
-
-### How to run it on your own machine
-
-1. Install the requirements
-
-   ```
-   $ pip install -r requirements.txt
-   ```
-
-2. Run the app
-
-   ```
-   $ streamlit run streamlit_app.py
-   ```
+![Screenshot 2024-11-11 at 21 16 45](https://github.com/user-attachments/assets/f86e0fd2-ae40-42a8-869f-0509e9cc5da5)

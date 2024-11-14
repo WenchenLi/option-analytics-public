@@ -15,17 +15,6 @@ st.set_page_config(
 st.title("Weekly Options Trade Analysis")
 
 # Read the CSV file
-today = datetime.now().strftime("%Y-%m-%d")
-coming_friday = (datetime.now() + timedelta(days=(4 - datetime.now().weekday()))).strftime("%Y-%m-%d")
-data_link_tempalte=f"https://ugwxqrmxqtcvicxhcnla.supabase.co/storage/v1/object/public/option-analytics/weekly_options_trade{today}_exp{coming_friday}_sorted_by_return.csv"
-
-today_data_link=data_link_tempalte.replace(today, coming_friday)
-# write data link to page
-st.write("today",today)
-st.write("coming friday",coming_friday)
-st.write(today_data_link)
-
-# today_data_link="https://ugwxqrmxqtcvicxhcnla.supabase.co/storage/v1/object/public/option-analytics/weekly_options_trade2024-11-13_exp2024-11-15_sorted_by_return.csv"
 @st.cache_data  # This caches the data to improve performance
 def load_data():
     df = pd.read_csv(today_data_link)

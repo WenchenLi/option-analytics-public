@@ -1,6 +1,7 @@
 import streamlit as st
 import pandas as pd
 from datetime import datetime, timedelta
+import pytz
 
 
 
@@ -15,7 +16,18 @@ st.set_page_config(
 st.title("Weekly Options Trade Analysis")
 
 # Read the CSV file
-@st.cache_data  # This caches the data to improve performance
+et_timezone = pytz.timezone('US/Eastern')
+et_now = datetime.now(et_timezone)
+today = et_now.strftime("%Y-%m-%d")
+coming_friday = (et_now + timedelta(days=(4 - et_now.weekday()))).strftime("%Y-%m-%d")
+
+# Add a note about timezone
+st.caption("All dates are in Eastern Time (ET)")
+
+today_data_link=f"https://ugwxqrmxqtcvicxhcnla.supabase.co/storage/v1/object/public/option-analytics/weekly_options_trade{today}_exp{coming_friday}_sorted_by_return.csv"
+
+# today_data_link="https://ugwxqrmxqtcvicxhcnla.supabase.co/storage/v1/object/public/option-analytics/weekly_options_trade2024-11-13_exp2024-11-15_sorted_by_return.csv"
+# @st.cache_data  # This caches the data to improve performance
 def load_data():
     df = pd.read_csv(today_data_link)
     return df

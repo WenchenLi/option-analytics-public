@@ -32,6 +32,14 @@ def load_data():
     df = pd.read_csv(today_data_link)
     return df
 
+# After timezone setup and before loading data
+et_now = datetime.now(et_timezone)
+current_time = et_now.time()
+market_close_time = datetime.strptime("16:00", "%H:%M").time()
+
+if current_time < market_close_time:
+    st.warning("⚠️ Daily options data will be available after 4:00 PM ET. Data shown may be from the previous trading day.")
+
 try:
     # Load the data
     df = load_data()

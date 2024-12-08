@@ -49,7 +49,7 @@ if st.session_state.last_selected_date != selected_date:
     st.cache_data.clear()  # Clear Streamlit cache
     st.session_state.last_selected_date = selected_date
     st.session_state.cache_cleared = True
-    st.info("Cache cleared due to date change.")
+    # st.info("Cache cleared due to date change.")
 
 # Convert selected date to datetime with ET timezone
 selected_datetime = datetime.combine(selected_date, datetime.min.time())

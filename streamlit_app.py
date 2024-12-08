@@ -30,12 +30,26 @@ st.title("Weekly Options Trade Analysis")
 et_timezone = pytz.timezone('US/Eastern')
 et_now = datetime.now(et_timezone)
 
+# Add session state for cache clearing
+if "last_selected_date" not in st.session_state:
+    st.session_state.last_selected_date = None
+
+if "cache_cleared" not in st.session_state:
+    st.session_state.cache_cleared = False
+
 # Date selection
 selected_date = st.date_input(
     "Select Date",
     value=et_now.date(),
     max_value=et_now.date()
 )
+
+# Clear cache when the date changes
+if st.session_state.last_selected_date != selected_date:
+    st.cache_data.clear()  # Clear Streamlit cache
+    st.session_state.last_selected_date = selected_date
+    st.session_state.cache_cleared = True
+    st.info("Cache cleared due to date change.")
 
 # Convert selected date to datetime with ET timezone
 selected_datetime = datetime.combine(selected_date, datetime.min.time())
@@ -53,12 +67,12 @@ else:
     st.caption("All dates are in Eastern Time (ET)")
 
     @st.cache_data
-    def load_data():
-        df = pd.read_csv(data_url)
+    def load_data(url):
+        df = pd.read_csv(url)
         return df
 
     try:
-        df = load_data()
+        df = load_data(data_url)
         
         # Sidebar filters
         st.sidebar.header("Filters")
